@@ -17,13 +17,12 @@ CoverBackground
         property bool autoPressBackCover: true
         property int coverRows: 3 
     }
-ConfigurationValue
+    ConfigurationValue
     {
         id: coverButtons
         key: "/apps/sky-remote/coverButtons"
-       defaultValue: [{"keypress1":"channeldown","imgsource1":"image://theme/icon-m-down","keypress2":"channelup" ,"imgsource2":"image://theme/icon-m-up"},{"keypress1":"power","imgsource1":"image://theme/graphic-power-off","keypress2":"playpause" ,"imgsource2":"../pages/play-pause.png"},{"keypress1":"rewind","imgsource1":"../pages/r-rewind.png","keypress2":"fastforward" ,"imgsource2":"../pages/f-forward.png"}]
+       defaultValue: [{"keypress1":"channeldown","imgdark1":"image://theme/icon-m-down","imglight1":"image://theme/icon-m-down","keypress2":"channelup" ,"imgdark2":"image://theme/icon-m-up" ,"imglight2":"image://theme/icon-m-up"},{"keypress1":"power","imgdark1":"image://theme/graphic-power-off","imglight1":"image://theme/graphic-power-off","keypress2":"playpause" ,"imgdark2":"../pages/play-pause.png" ,"imglight2":"../pages/play-pause_light.png"},{"keypress1":"rewind","imgdark1":"../pages/r-rewind.png","imglight1":"../pages/r-rewind_light.png","keypress2":"fastforward" ,"imgdark2":"../pages/f-forward.png","imglight2":"../pages/f-forward_light.png"}]
     }
-    
     CoverCurrentMedia
     {
         id:coverCurrentMedia
@@ -35,12 +34,12 @@ ConfigurationValue
     CoverActionList 
     {
         id: remoteActions
-        enabled: !coverCurrentMedia.isStandby
+        enabled: !coverCurrentMedia.isStandby && !coverCurrentMedia.notFound
         CoverAction 
         {
             id: changeRow
             property int currentRow: 0
-            iconSource: isFwdRev ? "../pages/play-pause.png" : "image://theme/icon-cover-shuffle"
+            iconSource: isFwdRev ? (Theme.colorScheme == Theme.LightOnDark ? "../pages/play-pause.png": "../pages/play-pause_light.png"): "image://theme/icon-cover-shuffle"
             onTriggered: {
                 if(isFwdRev) pressButton("playpause")
                 else
@@ -55,7 +54,7 @@ ConfigurationValue
 
             property string text: coverButtons.value[changeRow.currentRow]["keypress1"] 
     
-            iconSource:coverButtons.value[changeRow.currentRow]["imgsource1"] 
+            iconSource:Theme.colorScheme == Theme.LightOnDark ? coverButtons.value[changeRow.currentRow]["imgdark1"] : coverButtons.value[changeRow.currentRow]["imglight1"] 
             onTriggered: pressButton(text)
         }
         CoverAction {
@@ -63,14 +62,14 @@ ConfigurationValue
 
             property string text: coverButtons.value[changeRow.currentRow]["keypress2"] 
     
-            iconSource:coverButtons.value[changeRow.currentRow]["imgsource2"] 
+            iconSource:Theme.colorScheme == Theme.LightOnDark ? coverButtons.value[changeRow.currentRow]["imgdark2"] : coverButtons.value[changeRow.currentRow]["imglight2"]  
             onTriggered: pressButton(text)
         }
     }
     CoverActionList 
     {          
         id: standbyActions
-        enabled: coverCurrentMedia.isStandby
+        enabled: coverCurrentMedia.isStandby && !coverCurrentMedia.notFound
         CoverAction 
         {
             iconSource: "image://theme/graphic-power-off"
@@ -82,6 +81,30 @@ ConfigurationValue
                     })
             }
                 
+        }
+    }
+    CoverActionList 
+    {          
+        id: notFoundActions
+        enabled: coverCurrentMedia.notFound
+        CoverAction 
+        {
+            iconSource: "image://theme/icon-cover-refresh"
+            onTriggered: 
+            {
+                    python.call('helper.findSkyBox',[2],function(result) {
+                        if (result)  coverChannel = !coverChannel
+                    })
+            }
+        }
+        CoverAction 
+        {
+            iconSource: "image://theme/icon-cover-dialer"
+            onTriggered: 
+            {
+                pageStack.push("../pages/ConnectSkyBox.qml",{},PageStackAction.Immediate)  
+                    app.activate()
+            }
         }
     }
     

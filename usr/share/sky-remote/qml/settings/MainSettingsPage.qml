@@ -24,7 +24,7 @@ Page
     {
         id: coverButtons
         key: "/apps/sky-remote/coverButtons"
-       defaultValue: [{"keypress1":"channeldown","imgsource1":"image://theme/icon-m-down","keypress2":"channelup" ,"imgsource2":"image://theme/icon-m-up"},{"keypress1":"power","imgsource1":"image://theme/graphic-power-off","keypress2":"playpause" ,"imgsource2":"../pages/play-pause.png"},{"keypress1":"rewind","imgsource1":"../pages/r-rewind.png","keypress2":"fastforward" ,"imgsource2":"../pages/f-forward.png"}]
+       defaultValue: [{"keypress1":"channeldown","imgdark1":"image://theme/icon-m-down","imglight1":"image://theme/icon-m-down","keypress2":"channelup" ,"imgdark2":"image://theme/icon-m-up" ,"imglight2":"image://theme/icon-m-up"},{"keypress1":"power","imgdark1":"image://theme/graphic-power-off","imglight1":"image://theme/graphic-power-off","keypress2":"playpause" ,"imgdark2":"../pages/play-pause.png" ,"imglight2":"../pages/play-pause_light.png"},{"keypress1":"rewind","imgdark1":"../pages/r-rewind.png","imglight1":"../pages/r-rewind_light.png","keypress2":"fastforward" ,"imgdark2":"../pages/f-forward.png","imglight2":"../pages/f-forward_light.png"}]
         onValueChanged: updateCoverRowsModel()
     }
 
@@ -116,7 +116,7 @@ Page
                 onClicked: {
                     skySettings.coverRows =skySettings.coverRows + 1
                     var configList = coverButtons.value
-                     configList.push({"keypress1":"channeldown","imgsource1":"image://theme/icon-m-down","keypress2":"channelup" ,"imgsource2":"image://theme/icon-m-up"})
+                     configList.push({"keypress1":"channeldown","imgdark1":"image://theme/icon-m-down","imglight1":"image://theme/icon-m-down","keypress2":"channelup" ,"imgdark2":"image://theme/icon-m-up","imglight2":"image://theme/icon-m-up"})
                     coverButtons.value = configList 
                 } 
             }
@@ -137,8 +137,8 @@ Page
                 id: cmbBox
                  width: coverButtonList.width
                    
-                source1: model.imgsource1
-                source2: model.imgsource2
+                source1:Theme.colorScheme == Theme.LightOnDark ? model.imgdark1 :model.imglight1  
+                source2:Theme.colorScheme == Theme.LightOnDark ?  model.imgdark2 :model.imglight2  
                 rowId:model.index 
                 
             Component.onCompleted: coverButtonList.rowHeight = height          

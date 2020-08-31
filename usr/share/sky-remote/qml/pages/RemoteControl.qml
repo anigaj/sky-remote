@@ -96,7 +96,7 @@ Page
                         height:powerIconRect.height 
                         width: height
                         isIcon:true
-                        source: "image://theme/icon-m-call-recording-on-light" 
+                        source: Theme.colorScheme == Theme.LightOnDark ? "image://theme/icon-m-call-recording-on-light" :"image://theme/icon-m-call-recording-on-dark"  
                         onClicked: {
                             python.call('helper.pressButton',["record"],function() {})
                         
@@ -117,7 +117,7 @@ Page
                     height:powerIconRect.height 
                     width:parent.width/3
                     isIcon:true
-                    source: "r-rewind.png" 
+                    source: Theme.colorScheme == Theme.LightOnDark ? "r-rewind.png" : "r-rewind_light.png" 
                     onClicked: {
                         python.call('helper.pressButton',["rewind"],function() {})
                         isFwdRev = true
@@ -128,7 +128,7 @@ Page
                     height:powerIconRect.height 
                     width:parent.width/3
                     isIcon:true
-                    source: "play-pause.png" 
+                    source: Theme.colorScheme == Theme.LightOnDark ?  "play-pause.png" : "play-pause_light.png" 
                     onClicked:{ 
                         python.call('helper.pressPlayPause',[isFwdRev],function() {})
                         isFwdRev = false
@@ -139,7 +139,7 @@ Page
                     height:powerIconRect.height 
                     width:parent.width/3
                     isIcon:true
-                    source: "f-forward.png" 
+                    source: Theme.colorScheme == Theme.LightOnDark ? "f-forward.png" :"f-forward_light.png"  
                     onClicked:{
                             python.call('helper.pressButton',["fastforward"],function() {})
                             isFwdRev = true

@@ -9,6 +9,7 @@ Item
     property variant details
     property alias loadedItem: componentLoader.item
     property bool isStandby: true
+    property bool notFound: false
         
     Connections
     {
@@ -35,16 +36,21 @@ Item
                          loadedItem.text =  result["appName"]
                         coverCurrentMedia.isStandby = false
                     }
-                    else coverCurrentMedia.isStandby = true 
+                    else coverCurrentMedia.isStandby = true
+                    coverCurrentMedia.notFound = false 
                 }
                 else if(result["isOff"]) 
                 {
-                    pageStack.push("../pages/ConnectSkyBox.qml",{},PageStackAction.Immediate)  
-                    app.activate()
+                    //pageStack.push("../pages/ConnectSkyBox.qml",{},PageStackAction.Immediate)  
+                    //app.activate()
+                    componentLoader.sourceComponent =notFound
+                    coverCurrentMedia.isStandby = false
+                    coverCurrentMedia.notFound = true     
                 }
                 else
                 {
                     coverCurrentMedia.isStandby = false
+                    coverCurrentMedia.notFound = false
                     details = result
                     componentLoader.sourceComponent =mediaContent     
                 }
@@ -52,7 +58,7 @@ Item
             
              if(coverPage.pressBack) 
             {
-                python.call('helper.pressButton',["backup"],function() {console.log("backup pressed")})
+                python.call('helper.pressButton',["backup"],function() {})
                 coverPage.pressBack = false
             } 
         }
@@ -72,6 +78,22 @@ Item
             wrapMode: Text.Wrap
              //% "Sky Q Box is on standby"
              text: qsTrId("sky-standby") 
+        }
+    }
+    Component 
+    {
+        id: notFound
+        Label
+        {
+            id: notFoundText
+            height :coverCurrentMedia.height
+            width: coverCurrentMedia.width
+            font.pixelSize: Theme.fontSizeLarge
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            //% "Sky Q box not detected retry or enter ip address manually"
+            text:qsTrId("sky-not-found")
         }
     }
     

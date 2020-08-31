@@ -38,7 +38,7 @@ Item
             })
              if(remotePage.pressBack) 
             {
-                python.call('helper.pressButton',["backup"],function() {console.log("backup pressed")})
+                python.call('helper.pressButton',["backup"],function() {})
                 remotePage.pressBack = false
             } 
         }

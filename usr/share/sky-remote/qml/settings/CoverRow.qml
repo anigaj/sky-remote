@@ -18,7 +18,8 @@ Item
            var currentButtons = coverButtons.value
 
             currentButtons[rowId]["keypress" + buttonNum] =_activeMenuItem.keyPress
-            currentButtons[rowId]["imgsource" + buttonNum] =_activeMenuItem.iconSrc
+            currentButtons[rowId]["imgdark" + buttonNum] =_activeMenuItem.iconSrcDark
+            currentButtons[rowId]["imglight" + buttonNum] =_activeMenuItem.iconSrcLight
             coverButtons.value = currentButtons
             coverButtonList.opacity = 1.0
             content.opacity = 1.0

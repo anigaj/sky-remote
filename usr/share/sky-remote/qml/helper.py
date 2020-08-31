@@ -151,44 +151,46 @@ def getDetails():
     return detailsStr 
 
 def getCurrentMedia():                                                                                                                                                                
-                                                                                                                                                                
-    if(sky.powerStatus() == "ON"):                                                                                                                                                    
-        app = sky.getActiveApplication() 
-        if(app != "com.bskyb.epgui"):                                                                                                                                                        
-            return  {"isApp":True, "isStandby": False, "appName":app, "isOff": False }
+    try:                                                                                                                                                                    
+        if(sky.powerStatus() == "ON"):                                                                                                                                                    
+            app = sky.getActiveApplication() 
+            if(app != "com.bskyb.epgui"):                                                                                                                                                        
+                return  {"isApp":True, "isStandby": False, "appName":app, "isOff": False }
 
-        tryCount = 0
-        while True:
-            try:                                                                                                                                                                                            
-                if(tryCount == 3):                                                                                                                                                                                                    
-                    return  {"isApp":False, "isStandby": False,  "isOff": True }
-                tryCount = tryCount + 1
+            tryCount = 0
+            while True:
+                try:                                                                                                                                                                                            
+                    if(tryCount == 3):                                                                                                                                                                                                    
+                        return  {"isApp":False, "isStandby": False,  "isOff": True }
+                    tryCount = tryCount + 1
 
-                data = json.loads(sky.getCurrentMedia().as_json())
-                details = data["attributes"]
-                if(details["live"] ):            
-                    sid = int(details["sid"])
-                    currentTV = json.loads(sky.getCurrentLiveTVProgramme(sid).as_json())
-                    currentTV = currentTV["attributes"]
-                    a_dict = {"channel" : details["channel"]}
-                    currentTV.update(a_dict)
-                else:                                                                                                                                                                                    
-                    pvrId = details["pvrId"]
-                    currentTV = json.loads(sky.getRecording(pvrId).as_json())
-                    currentTV = currentTV["attributes"]
-            except:                                                                                                                                                                                                                        
-                continue
-            else:                                                                                                                                                                                                                
-                break
-        channelKey = channelKeys[channelList.index(currentTV["channel"])]
-        channelKey = channelKey.replace("channelname","channelno")
+                    data = json.loads(sky.getCurrentMedia().as_json())
+                    details = data["attributes"]
+                    if(details["live"] ):            
+                        sid = int(details["sid"])
+                        currentTV = json.loads(sky.getCurrentLiveTVProgramme(sid).as_json())
+                        currentTV = currentTV["attributes"]
+                        a_dict = {"channel" : details["channel"]}
+                        currentTV.update(a_dict)
+                    else:                                                                                                                                                                                    
+                        pvrId = details["pvrId"]
+                        currentTV = json.loads(sky.getRecording(pvrId).as_json())
+                        currentTV = currentTV["attributes"]
+                except:                                                                                                                                                                                                                        
+                    continue
+                else:                                                                                                                                                                                                                
+                    break
+            channelKey = channelKeys[channelList.index(currentTV["channel"])]
+            channelKey = channelKey.replace("channelname","channelno")
 
-        a_dict = {"channelno":channelDict[channelKey], "live": details["live"]}
-        currentTV.update(a_dict)
-        currentTV["imageUrl"] = details["imageUrl"]
+            a_dict = {"channelno":channelDict[channelKey], "live": details["live"]}
+            currentTV.update(a_dict)
+            currentTV["imageUrl"] = details["imageUrl"]
  
-        return currentTV
-    elif(sky.powerStatus() == "STANDBY"):                                                                                                                                                                                                                                                    
-        return {"isApp":False, "isStandby": True, "isOff": False} 
-    else:                                                                                                                                                                                                                                                                  
-        return {"isApp":False, "isStandby": False, "isOff": True} 
+            return currentTV
+        elif(sky.powerStatus() == "STANDBY"):                                                                                                                                                                                                                                                    
+            return {"isApp":False, "isStandby": True, "isOff": False} 
+        else:                                                                                                                                                                                                                                                                  
+            return {"isApp":False, "isStandby": False, "isOff": True}
+    except:                                                                                                                                                                                                                                                                                    
+        return {"isApp":False, "isStandby": False, "isOff": True}  
