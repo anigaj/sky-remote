@@ -4,43 +4,43 @@
 <context>
     <name></name>
     <message id="sky-standby">
-        <location filename="../qml/cover/CoverCurrentMedia.qml" line="74"/>
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="80"/>
         <location filename="../qml/pages/CurrentMedia.qml" line="60"/>
         <source>Sky Q Box is on standby</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-live">
-        <location filename="../qml/cover/CoverCurrentMedia.qml" line="130"/>
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="152"/>
         <location filename="../qml/pages/CurrentMedia.qml" line="100"/>
         <source>live</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-recorded">
-        <location filename="../qml/cover/CoverCurrentMedia.qml" line="132"/>
-        <location filename="../qml/cover/CoverCurrentMedia.qml" line="204"/>
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="154"/>
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="226"/>
         <location filename="../qml/pages/CurrentMedia.qml" line="102"/>
         <location filename="../qml/pages/CurrentMedia.qml" line="185"/>
         <source>recorded</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-season-abv">
-        <location filename="../qml/cover/CoverCurrentMedia.qml" line="166"/>
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="188"/>
         <source>Se.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-episode-abv">
-        <location filename="../qml/cover/CoverCurrentMedia.qml" line="168"/>
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="190"/>
         <source>Ep.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-start-time">
-        <location filename="../qml/cover/CoverCurrentMedia.qml" line="204"/>
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="226"/>
         <location filename="../qml/pages/CurrentMedia.qml" line="185"/>
         <source>Start time</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-end-time">
-        <location filename="../qml/cover/CoverCurrentMedia.qml" line="223"/>
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="245"/>
         <location filename="../qml/pages/CurrentMedia.qml" line="203"/>
         <source>End time</source>
         <translation type="unfinished"></translation>
@@ -70,6 +70,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-not-found">
+        <location filename="../qml/cover/CoverCurrentMedia.qml" line="96"/>
         <location filename="../qml/pages/ConnectSkyBox.qml" line="73"/>
         <source>Sky Q box not detected retry or enter ip address manually</source>
         <translation type="unfinished"></translation>
@@ -86,7 +87,7 @@
     </message>
     <message id="sky-not-found-detail">
         <location filename="../qml/pages/ConnectSkyBox.qml" line="163"/>
-        <source>Check the Sky Q box is powered and the phone is connected to the same wifi network as the box. The sky q box ip address can be found by going to Home-&gt;Settings-&gt;System on the sky q box.</source>
+        <source>Check the Sky Q box is powered and the phone is connected to the same wifi network as the box. The sky q box ip address can be found by going to Home-&gt;Settings-&gt;Status -&gt;Network Connection -&gt; Setup -&gt;Advanced settings on the sky q box.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-season">
@@ -110,12 +111,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-row">
-        <location filename="../qml/settings/CoverRow.qml" line="36"/>
+        <location filename="../qml/settings/CoverRow.qml" line="37"/>
         <source>Row</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="removing-user">
-        <location filename="../qml/settings/CoverRow.qml" line="92"/>
+        <location filename="../qml/settings/CoverRow.qml" line="93"/>
         <source>Removing user</source>
         <translation type="unfinished"></translation>
     </message>

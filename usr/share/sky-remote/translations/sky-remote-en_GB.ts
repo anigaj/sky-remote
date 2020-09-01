@@ -60,7 +60,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-not-found-detail">
-        <source>Check the Sky Q box is powered and the phone is connected to the same wifi network as the box. The sky q box ip address can be found by going to Home-&gt;Settings-&gt;System on the sky q box.</source>
+        <source>Check the Sky Q box is powered and the phone is connected to the same wifi network as the box. The sky q box ip address can be found by going to Home-&gt;Settings-&gt;Status -&gt;Network Connection -&gt; Setup -&gt;Advanced settings on the sky q box.</source>
         <translation type="unfinished"></translation>
     </message>
     <message id="sky-season">

@@ -159,7 +159,7 @@ Page
                 opacity: 0.6
                 font.pixelSize: Theme.fontSizeSmall
                 color:  Theme.highlightColor
-                 //% "Check the Sky Q box is powered and the phone is connected to the same wifi network as the box. The sky q box ip address can be found by going to Home->Settings->System on the sky q box."
+                 //% "Check the Sky Q box is powered and the phone is connected to the same wifi network as the box. The sky q box ip address can be found by going to Home->Settings->Status ->Network Connection -> Setup ->Advanced settings on the sky q box."
                  text:qsTrId("sky-not-found-detail")       
             }
         }
