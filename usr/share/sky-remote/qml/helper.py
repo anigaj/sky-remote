@@ -165,6 +165,7 @@ def getCurrentMedia():
                     tryCount = tryCount + 1
 
                     data = json.loads(sky.getCurrentMedia().as_json())
+                    #print(data)
                     details = data["attributes"]
                     if(details["live"] ):            
                         sid = int(details["sid"])
@@ -172,10 +173,13 @@ def getCurrentMedia():
                         currentTV = currentTV["attributes"]
                         a_dict = {"channel" : details["channel"]}
                         currentTV.update(a_dict)
+                        currentTV["imageUrl"] = details["imageUrl"]
                     else:                                                                                                                                                                                    
                         pvrId = details["pvrId"]
                         currentTV = json.loads(sky.getRecording(pvrId).as_json())
                         currentTV = currentTV["attributes"]
+                        a_dict = {"channel" : currentTV["channelname"]}
+                        currentTV.update(a_dict)
                 except:                                                                                                                                                                                                                        
                     continue
                 else:                                                                                                                                                                                                                
@@ -184,9 +188,7 @@ def getCurrentMedia():
             channelKey = channelKey.replace("channelname","channelno")
 
             a_dict = {"channelno":channelDict[channelKey], "live": details["live"]}
-            currentTV.update(a_dict)
-            currentTV["imageUrl"] = details["imageUrl"]
- 
+            currentTV.update(a_dict)          
             return currentTV
         elif(sky.powerStatus() == "STANDBY"):                                                                                                                                                                                                                                                    
             return {"isApp":False, "isStandby": True, "isOff": False} 
